@@ -5,5 +5,5 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/Portfolio/', // Unga GitHub repository peyar match aagum padi irukkattum
+  base: '/portfolio/', // <-- Small letters '/portfolio/' aaga irukka vendum
 })

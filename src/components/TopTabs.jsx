@@ -19,12 +19,12 @@ import ThemeSwitcher from "./ThemeSwitcher.jsx";
 // NAVIGATION ITEMS CONFIGURATION
 // ==========================================
 const navItems = [
-  { id: "hero", label: "Home", devLabel: "hero.jsx", icon: <Home size={19} /> },
-  { id: "about", label: "About", devLabel: "about.jsx", icon: <User size={19} /> },
-  { id: "skills", label: "Skills", devLabel: "skills.json", icon: <Code2 size={19} /> },
-  { id: "projects", label: "Projects", devLabel: "projects/", icon: <Briefcase size={19} /> },
-  { id: "education", label: "Education", devLabel: "education.sys", icon: <GraduationCap size={19} /> },
-  { id: "contact", label: "Contact", devLabel: "contact.sh", icon: <Mail size={19} /> },
+  { id: "hero", label: "Home", devLabel: "hero.jsx", icon: <Home size={17} /> },
+  { id: "about", label: "About", devLabel: "about.jsx", icon: <User size={17} /> },
+  { id: "skills", label: "Skills", devLabel: "skills.json", icon: <Code2 size={17} /> },
+  { id: "education", label: "Education", devLabel: "education.sys", icon: <GraduationCap size={17} /> },
+  { id: "projects", label: "Projects", devLabel: "projects/", icon: <Briefcase size={17} /> },
+  { id: "contact", label: "Contact", devLabel: "contact.sh", icon: <Mail size={17} /> },
 ];
 
 export default function Navbar({ activeId }) {
@@ -38,6 +38,9 @@ export default function Navbar({ activeId }) {
     } else {
       document.body.style.overflow = "unset";
     }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [isOpen]);
 
   // Auto-highlight active tab on user scroll
@@ -74,27 +77,28 @@ export default function Navbar({ activeId }) {
     }
   };
 
+  const cvDownloadUrl = `${import.meta.env.BASE_URL}Yogaraj_S CV.pdf`;
+
   return (
     <>
       {/* =========================================================
           DESKTOP & MOBILE TOP HEADER BAR
           ========================================================= */}
       <header className="fixed top-0 left-0 right-0 z-40 border-b border-cyan-500/15 bg-[#02050e]/95 backdrop-blur-2xl transition-all select-none">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           
           {/* Brand Logo & Title */}
           <a
             href="#hero"
             onClick={(e) => handleScrollTo(e, "hero")}
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-3 group shrink-0"
           >
-            {/* Cyan Cyber Glow Geometric Logo */}
             <div className="text-cyan-400 drop-shadow-[0_0_12px_rgba(56,189,248,0.5)] transition-transform duration-300 group-hover:scale-105">
-              <Logo className="h-9 w-9" />
+              <Logo className="h-8 w-8 sm:h-9 sm:w-9" />
             </div>
 
             <div className="flex flex-col">
-              <span className="font-mono text-sm font-extrabold tracking-wider text-white">
+              <span className="font-mono text-xs sm:text-sm font-extrabold tracking-wider text-white">
                 YOGARAJ S
               </span>
               <span className="text-[10px] text-cyan-400 font-medium tracking-wide">
@@ -104,23 +108,24 @@ export default function Navbar({ activeId }) {
           </a>
 
           {/* ================= DESKTOP VIEW: TABS & CONTROLS ================= */}
-          <div className="hidden md:flex items-center gap-4">
-            <nav className="flex items-center gap-1.5 font-mono text-xs">
+          <div className="hidden md:flex items-center gap-3 lg:gap-4">
+            <nav className="flex items-center gap-1 font-mono text-[11px] lg:text-xs">
               {/* macOS Style Console Indicator */}
-              <div className="flex items-center gap-1.5 pr-3 mr-1 border-r border-white/10">
+              <div className="flex items-center gap-1.5 pr-2.5 mr-1 border-r border-white/10">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#f59e0b]" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#10b981]" />
               </div>
 
+              {/* Render ALL navigation tabs without slice */}
               {navItems.map((tab) => {
                 const active = currentSection === tab.id;
                 return (
                   <a
-                    key={tab.label}
+                    key={tab.id}
                     href={`#${tab.id}`}
                     onClick={(e) => handleScrollTo(e, tab.id)}
-                    className={`group relative flex items-center gap-2 rounded-lg px-3 py-1.5 transition-all duration-200 ${
+                    className={`group relative flex items-center gap-1.5 rounded-lg px-2.5 lg:px-3 py-1.5 transition-all duration-200 ${
                       active
                         ? "border border-cyan-400/40 bg-cyan-950/40 text-cyan-300 shadow-[0_0_15px_rgba(56,189,248,0.15)]"
                         : "border border-transparent text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]"
@@ -137,13 +142,13 @@ export default function Navbar({ activeId }) {
             </nav>
 
             {/* Desktop Theme Switcher */}
-            <div className="border-l border-white/10 pl-3">
+            <div className="border-l border-white/10 pl-2">
               <ThemeSwitcher />
             </div>
           </div>
 
           {/* ================= MOBILE CONTROLS ================= */}
-          <div className="flex items-center gap-2.5 md:hidden">
+          <div className="flex items-center gap-2 md:hidden">
             <ThemeSwitcher />
             <button
               onClick={() => setIsOpen(true)}
@@ -166,7 +171,7 @@ export default function Navbar({ activeId }) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.28, ease: "easeInOut" }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
             className="fixed inset-0 z-50 flex flex-col justify-between bg-[#040817] px-6 pt-6 pb-10 text-white md:hidden"
           >
             {/* Top Bar with Brand & Close Button */}
@@ -187,7 +192,7 @@ export default function Navbar({ activeId }) {
 
               <button
                 onClick={() => setIsOpen(false)}
-                className="flex h-10 w-10 items-center justify-center rounded-full text-slate-300 transition-colors hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full text-slate-300 transition-colors hover:text-white active:scale-95"
                 aria-label="Close Mobile Menu"
               >
                 <X size={24} />
@@ -195,21 +200,21 @@ export default function Navbar({ activeId }) {
             </div>
 
             {/* Menu Nav Links */}
-            <div className="my-auto flex flex-col space-y-3 py-6 font-sans">
+            <div className="my-auto flex flex-col space-y-2.5 py-4 font-sans">
               {navItems.map((item) => {
                 const active = currentSection === item.id;
                 return (
                   <a
-                    key={item.label}
+                    key={item.id}
                     href={`#${item.id}`}
                     onClick={(e) => handleScrollTo(e, item.id)}
-                    className={`flex items-center justify-between rounded-2xl px-5 py-4 text-base font-semibold transition-all duration-200 ${
+                    className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 ${
                       active
                         ? "border border-cyan-400/40 bg-gradient-to-r from-cyan-500/25 via-blue-600/20 to-transparent text-cyan-300 shadow-[0_0_20px_rgba(56,189,248,0.2)]"
                         : "text-slate-300 hover:bg-white/[0.04] hover:text-white"
                     }`}
                   >
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3.5">
                       <span className={active ? "text-cyan-400" : "text-slate-400"}>
                         {item.icon}
                       </span>
@@ -217,7 +222,7 @@ export default function Navbar({ activeId }) {
                     </div>
 
                     {active && (
-                      <ChevronRight size={19} className="text-cyan-400" />
+                      <ChevronRight size={18} className="text-cyan-400" />
                     )}
                   </a>
                 );
@@ -227,10 +232,10 @@ export default function Navbar({ activeId }) {
             {/* Bottom: Download CV Button */}
             <div className="pt-2">
               <a
-                href="/Yogaraj_S CV.pdf"
-                download
+                href={cvDownloadUrl}
+                download="Yogaraj_S_CV.pdf"
                 onClick={() => setIsOpen(false)}
-                className="flex w-full items-center justify-center gap-2.5 rounded-full border border-cyan-400/40 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-transparent py-4 text-sm font-bold text-cyan-300 shadow-[0_0_20px_rgba(56,189,248,0.15)] transition-all active:scale-95"
+                className="flex w-full items-center justify-center gap-2.5 rounded-full border border-cyan-400/40 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-transparent py-3.5 text-sm font-bold text-cyan-300 shadow-[0_0_20px_rgba(56,189,248,0.15)] transition-all active:scale-95"
               >
                 <Download size={16} />
                 <span>Download CV</span>

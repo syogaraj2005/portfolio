@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { GithubIcon } from "./icons.jsx";
+import { GithubIcon } from "./Icons.jsx";
 
 /* =========================================================
    PROJECTS

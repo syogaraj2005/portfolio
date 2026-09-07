@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, User, MessageSquare } from "lucide-react";
-import { LinkedinIcon, GithubIcon } from "./icons.jsx";
+import { LinkedinIcon, GithubIcon } from "./Icons.jsx";
 
 function encode(data) {
   return Object.keys(data)
