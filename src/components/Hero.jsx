@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import heroProfileImg from "../assets/my4.jpeg";
 import {
   motion,
   useMotionValue,
@@ -495,7 +496,7 @@ export default function Hero() {
             className="relative w-full max-w-[400px] aspect-[4/5] mx-auto flex items-end transition-transform duration-300"
           >
             <img
-              src="/public/my4.jpeg"
+              src={heroProfileImg}
               alt="Yogaraj S"
               className="w-full h-full object-cover object-top [mask-image:linear-gradient(to_bottom,black_68%,transparent_98%)] grayscale contrast-125 brightness-100 drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)] pointer-events-none"
             />
@@ -514,7 +515,6 @@ export default function Hero() {
             </span>
           </motion.div>
         </motion.div>
-        
 
         {/* RIGHT COLUMN: Value Proposition & CTAs */}
         <motion.div
@@ -573,49 +573,48 @@ export default function Hero() {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-5 font-mono text-xs">
-          <div className="flex items-center gap-3 text-slate-400">
-            <div className="flex h-5 w-1 rounded bg-gradient-to-b from-cyan-400 to-indigo-600 shadow-[0_0_8px_#38bdf8]" />
-            <p className="tracking-wider uppercase text-[11px]">
-              ENGINEERED BY YOGARAJ S — RELIABLE ENTERPRISE BACKEND ECOSYSTEMS
-            </p>
-          </div>
-
-          {/* Social Links with Individual Brand Icons */}
-          <div className="flex items-center gap-3">
-            {socialLinks.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                onMouseEnter={() => handleElementEnter(item.name.toUpperCase())}
-                onMouseLeave={handleElementLeave}
-                className={`group relative flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2 text-slate-300 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:text-white ${item.hoverBorder} ${item.hoverBg} ${item.hoverShadow}`}
-                title={item.name}
-              >
-                <span
-                  style={{ color: item.color }}
-                  className="transition-transform duration-300 group-hover:scale-110"
-                >
-                  {item.icon}
-                </span>
-
-                <span className="font-mono text-xs tracking-wider">
-                  {item.name}
-                </span>
-
-                <span className="text-[10px] text-slate-500 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-cyan-300">
-                  ↗
-                </span>
-              </a>
-            ))}
-          </div>
+        <div className="flex items-center gap-3 text-slate-400">
+          <div className="flex h-5 w-1 rounded bg-gradient-to-b from-cyan-400 to-indigo-600 shadow-[0_0_8px_#38bdf8]" />
+          <p className="tracking-wider uppercase text-[11px]">
+            ENGINEERED BY YOGARAJ S — RELIABLE ENTERPRISE BACKEND ECOSYSTEMS
+          </p>
         </div>
+
+        {/* Social Links with Individual Brand Icons */}
+        <div className="flex items-center gap-3">
+          {socialLinks.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              target="_blank"
+              rel="noreferrer"
+              onMouseEnter={() => handleElementEnter(item.name.toUpperCase())}
+              onMouseLeave={handleElementLeave}
+              className={`group relative flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2 text-slate-300 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:text-white ${item.hoverBorder} ${item.hoverBg} ${item.hoverShadow}`}
+              title={item.name}
+            >
+              <span
+                style={{ color: item.color }}
+                className="transition-transform duration-300 group-hover:scale-110"
+              >
+                {item.icon}
+              </span>
+
+              <span className="font-mono text-xs tracking-wider">
+                {item.name}
+              </span>
+
+              <span className="text-[10px] text-slate-500 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-cyan-300">
+                ↗
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
 
       {/* ==========================================
           LAYER 5: INTERACTIVE SCROLL-DOWN INDICATOR
-          ========================================== */}
-      
+          ========================================= */}
       <div className="relative z-30 mx-auto -mt-6 mb-3 flex flex-col items-center justify-center">
         <button
           onClick={scrollToNextSection}
@@ -637,7 +636,6 @@ export default function Hero() {
               className="h-1.5 w-1 rounded-full bg-cyan-400 shadow-[0_0_6px_#38bdf8]"
             />
           </div>
-          
 
           <div className="flex flex-col items-center">
             <span className="font-mono text-[9px] uppercase tracking-[0.35em] text-slate-500 group-hover:text-cyan-300 transition-colors">

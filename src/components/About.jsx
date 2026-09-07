@@ -1,4 +1,5 @@
 import React from "react";
+import myProfileImg from "../assets/my2.jpeg";
 import { motion } from "framer-motion";
 import {
   User,
@@ -59,6 +60,8 @@ const milestones = [
 ];
 
 export default function About() {
+  const cvDownloadUrl = `${import.meta.env.BASE_URL}Yogaraj_S CV.pdf`;
+
   return (
     <section
       id="about"
@@ -113,8 +116,8 @@ export default function About() {
             {/* Action Buttons */}
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <a
-                href="/Yogaraj_S CV.pdf"
-                download
+                href={cvDownloadUrl}
+                download="Yogaraj_S_CV.pdf"
                 className="group flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-950/30 px-5 py-2.5 font-sans text-xs font-semibold text-cyan-300 shadow-[0_0_20px_rgba(56,189,248,0.2)] backdrop-blur-md transition-all duration-300 hover:border-cyan-300 hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_25px_rgba(56,189,248,0.5)]"
               >
                 <Download size={14} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
@@ -143,7 +146,7 @@ export default function About() {
             <div className="relative z-10 flex items-center justify-center">
               <div className="relative w-[340px] sm:w-[420px] aspect-[4/5] overflow-hidden rounded-3xl [mask-image:linear-gradient(to_bottom,black_75%,transparent_98%)]">
                 <img
-                  src="/public/my2.jpeg"
+                  src={myProfileImg}
                   alt="Yogaraj S"
                   className="w-full h-full object-cover object-top contrast-115 brightness-95 drop-shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
                 />
@@ -155,7 +158,7 @@ export default function About() {
               </div>
             </div>
 
-            {/* Floating Motivational Quote Floating Card */}
+            {/* Floating Motivational Quote Card */}
             <motion.div
               animate={{ y: [-4, 4, -4] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -169,7 +172,7 @@ export default function About() {
               </p>
             </motion.div>
 
-            {/* Floating Holographic Technology Badges (Reference Helix) */}
+            {/* Floating Holographic Technology Badges */}
             {floatingTech.map((tech, idx) => (
               <motion.div
                 key={tech.name}
