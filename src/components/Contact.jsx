@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, User, MessageSquare } from "lucide-react";
-import { LinkedinIcon, GithubIcon } from "./Icons.jsx";
-
+import { LinkedinIcon, GithubIcon } from "./icons.jsx";
 function encode(data) {
   return Object.keys(data)
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
