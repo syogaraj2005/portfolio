@@ -90,6 +90,7 @@ export default function Hero() {
   const [systemUptime] = useState("99.995");
   const [currentPing, setCurrentPing] = useState(12);
   const [ripples, setRipples] = useState([]);
+  const [isPhotoHovered, setIsPhotoHovered] = useState(false);
 
   // ==========================================
   // MOUSE PHYSICS & 3D PARALLAX SPRINGS
@@ -107,8 +108,8 @@ export default function Hero() {
 
   const tiltX = useMotionValue(0);
   const tiltY = useMotionValue(0);
-  const rotateX = useSpring(useTransform(tiltY, [-0.5, 0.5], [10, -10]), fastSpring);
-  const rotateY = useSpring(useTransform(tiltX, [-0.5, 0.5], [-10, 10]), fastSpring);
+  const rotateX = useSpring(useTransform(tiltY, [-0.5, 0.5], [12, -12]), fastSpring);
+  const rotateY = useSpring(useTransform(tiltX, [-0.5, 0.5], [-12, 12]), fastSpring);
 
   // ==========================================
   // EVENT LISTENERS & BACKGROUND INTERVALS
@@ -470,7 +471,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* CENTER COLUMN: 3D Cinematic Portrait */}
+        {/* CENTER COLUMN: 3D Cinematic Portrait With Interactive Hover Magic */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -478,40 +479,124 @@ export default function Hero() {
           style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
           className="relative lg:col-span-4 flex flex-col items-center justify-center -my-6 lg:my-0 select-none"
         >
+          {/* Outer Dynamic Spinning Orbit Ring */}
           <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-            className="absolute top-1/6 h-[380px] w-[380px] rounded-full border border-dashed border-cyan-400/20 pointer-events-none"
+            animate={{
+              rotate: 360,
+              scale: isPhotoHovered ? 1.08 : 1,
+              borderColor: isPhotoHovered
+                ? "rgba(56, 189, 248, 0.6)"
+                : "rgba(56, 189, 248, 0.2)",
+            }}
+            transition={{
+              rotate: {
+                duration: isPhotoHovered ? 14 : 32,
+                repeat: Infinity,
+                ease: "linear",
+              },
+              scale: { duration: 0.4 },
+              borderColor: { duration: 0.4 },
+            }}
+            className="absolute top-1/6 h-[390px] w-[390px] rounded-full border border-dashed pointer-events-none shadow-[0_0_30px_rgba(56,189,248,0.15)]"
           />
 
+          {/* Inner Counter-Rotating Dotted Ring */}
           <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-            className="absolute top-1/6 h-[440px] w-[440px] rounded-full border border-dotted border-violet-500/20 pointer-events-none"
+            animate={{
+              rotate: -360,
+              scale: isPhotoHovered ? 1.12 : 1,
+              borderColor: isPhotoHovered
+                ? "rgba(168, 85, 247, 0.6)"
+                : "rgba(139, 92, 246, 0.2)",
+            }}
+            transition={{
+              rotate: {
+                duration: isPhotoHovered ? 18 : 42,
+                repeat: Infinity,
+                ease: "linear",
+              },
+              scale: { duration: 0.4 },
+              borderColor: { duration: 0.4 },
+            }}
+            className="absolute top-1/6 h-[450px] w-[450px] rounded-full border border-dotted pointer-events-none"
           />
 
+          {/* Interactive Photo Frame Container */}
           <div
-            onMouseEnter={() => handleElementEnter("YOGARAJ")}
-            onMouseLeave={handleElementLeave}
-            className="relative w-full max-w-[400px] aspect-[4/5] mx-auto flex items-end transition-transform duration-300"
+            onMouseEnter={() => {
+              handleElementEnter("YOGARAJ");
+              setIsPhotoHovered(true);
+            }}
+            onMouseLeave={() => {
+              handleElementLeave();
+              setIsPhotoHovered(false);
+            }}
+            className="group relative w-full max-w-[400px] aspect-[4/5] mx-auto flex items-end cursor-pointer overflow-hidden rounded-3xl transition-all duration-500"
           >
-            <img
+            {/* Ambient Background Aura behind photo on hover */}
+            <div
+              className={`absolute inset-0 -z-10 rounded-full bg-gradient-to-tr from-cyan-500/35 via-indigo-600/30 to-purple-600/25 blur-3xl transition-opacity duration-500 ${
+                isPhotoHovered ? "opacity-100 scale-110" : "opacity-30 scale-95"
+              }`}
+            />
+
+            {/* Main Profile Image with Grayscale-to-Color + Zoom Dynamics */}
+            <motion.img
               src={heroProfileImg}
               alt="Yogaraj S"
-              className="w-full h-full object-cover object-top [mask-image:linear-gradient(to_bottom,black_68%,transparent_98%)] grayscale contrast-125 brightness-100 drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)] pointer-events-none"
+              animate={{
+                scale: isPhotoHovered ? 1.08 : 1,
+                filter: isPhotoHovered
+                  ? "grayscale(0%) contrast(110%) brightness(105%) drop-shadow(0 25px 45px rgba(56,189,248,0.45))"
+                  : "grayscale(100%) contrast(125%) brightness(100%) drop-shadow(0 15px 35px rgba(0,0,0,0.8))",
+              }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full h-full object-cover object-top [mask-image:linear-gradient(to_bottom,black_70%,transparent_98%)] transition-all"
             />
+
+            {/* Cyber Holographic HUD Scan Beam Effect */}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <motion.div
+                animate={isPhotoHovered ? { y: ["-10%", "110%"] } : { y: "-10%" }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="h-24 w-full bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent border-b border-cyan-300/60 shadow-[0_0_20px_#38bdf8]"
+              />
+            </div>
+
+            {/* Corner Cyber HUD Accents */}
+            <div className="absolute top-4 left-4 h-4 w-4 border-t-2 border-l-2 border-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110" />
+            <div className="absolute top-4 right-4 h-4 w-4 border-t-2 border-r-2 border-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110" />
+            <div className="absolute bottom-8 left-4 h-4 w-4 border-b-2 border-l-2 border-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110" />
+            <div className="absolute bottom-8 right-4 h-4 w-4 border-b-2 border-r-2 border-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110" />
           </div>
 
-          {/* Integrated Author & Title Badge */}
+          {/* Integrated Author & Title Badge with Glow on Hover */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="mt-3 flex items-center gap-3 rounded-full border border-cyan-500/20 bg-[#060b18]/85 px-4 py-2 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.6)]"
+            animate={{
+              opacity: 1,
+              y: 0,
+              borderColor: isPhotoHovered
+                ? "rgba(56, 189, 248, 0.6)"
+                : "rgba(6, 182, 212, 0.2)",
+              boxShadow: isPhotoHovered
+                ? "0 0 25px rgba(56, 189, 248, 0.35)"
+                : "0 8px 30px rgba(0,0,0,0.6)",
+            }}
+            transition={{ delay: 0.4, duration: 0.3 }}
+            className="mt-3 flex items-center gap-3 rounded-full border bg-[#060b18]/90 px-4 py-2 backdrop-blur-xl transition-all"
           >
-            <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#38bdf8] animate-pulse" />
+            <span
+              className={`h-2 w-2 rounded-full shadow-[0_0_10px_#38bdf8] ${
+                isPhotoHovered ? "bg-emerald-400 shadow-[0_0_12px_#34d399] scale-125" : "bg-cyan-400 animate-pulse"
+              } transition-all`}
+            />
             <span className="text-xs font-mono tracking-wider text-slate-200">
-              Yogaraj S — Backend Architect & Lead
+              Yogaraj S — {isPhotoHovered ? "SYSTEM READY // ONLINE" : "Backend Architect & Lead"}
             </span>
           </motion.div>
         </motion.div>
@@ -548,7 +633,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="#services"
+              href="#projects"
               onMouseEnter={() => handleElementEnter("EXPLORE")}
               onMouseLeave={handleElementLeave}
               className="rounded-full border border-white/20 bg-white/[0.04] px-7 py-3 text-xs font-bold uppercase tracking-wider text-slate-300 backdrop-blur-md transition-all duration-300 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_22px_rgba(56,189,248,0.3)] hover:scale-105"
@@ -614,7 +699,7 @@ export default function Hero() {
 
       {/* ==========================================
           LAYER 5: INTERACTIVE SCROLL-DOWN INDICATOR
-          ========================================= */}
+          ========================================== */}
       <div className="relative z-30 mx-auto -mt-6 mb-3 flex flex-col items-center justify-center">
         <button
           onClick={scrollToNextSection}

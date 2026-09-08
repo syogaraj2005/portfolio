@@ -15,15 +15,15 @@ const categories = [
 ];
 
 // =========================================================================
-// 2. CONCENTRIC PLANETARY ORBIT DATA (Dynamic Scaled Dimensions)
+// 2. ULTRA-ZOOMED MOBILE OPTIMIZED ORBIT DATA
 // =========================================================================
 const orbitRings = [
   {
     id: "inner",
-    rx: 240, // Horizontal radius
-    ry: 95,  // Vertical depth radius
+    rx: 145,
+    ry: 110,
     duration: 32,
-    direction: 1, // Clockwise
+    direction: 1,
     items: [
       { name: "Java", icon: "☕", color: "#f97316", cat: "Programming Languages" },
       { name: "Spring Boot", icon: "🍃", color: "#22c55e", cat: "Backend" },
@@ -35,10 +35,10 @@ const orbitRings = [
   },
   {
     id: "middle",
-    rx: 380,
-    ry: 150,
+    rx: 235,
+    ry: 175,
     duration: 48,
-    direction: -1, // Counter-Clockwise
+    direction: -1,
     items: [
       { name: "JavaScript", icon: "JS", color: "#facc15", cat: "Frontend" },
       { name: "HTML5", icon: "5", color: "#f97316", cat: "Frontend" },
@@ -52,10 +52,10 @@ const orbitRings = [
   },
   {
     id: "outer",
-    rx: 520,
-    ry: 205,
+    rx: 325,
+    ry: 245,
     duration: 65,
-    direction: 1, // Clockwise
+    direction: 1,
     items: [
       { name: "Git", icon: "⌥", color: "#f97316", cat: "Tools & Technologies" },
       { name: "GitHub", icon: "🐙", color: "#ffffff", cat: "Tools & Technologies" },
@@ -70,7 +70,6 @@ const orbitRings = [
   },
 ];
 
-// Revolving Planet Track
 function RevolvingRing({ ring, isPaused, setActiveSkill }) {
   const total = ring.items.length;
 
@@ -86,7 +85,7 @@ function RevolvingRing({ ring, isPaused, setActiveSkill }) {
         width: ring.rx * 2,
         height: ring.ry * 2,
       }}
-      className="absolute rounded-[100%] border border-cyan-400/15 pointer-events-none"
+      className="absolute rounded-[100%] border border-cyan-400/25 pointer-events-none shadow-[0_0_25px_rgba(56,189,248,0.12)]"
     >
       {ring.items.map((skill, index) => {
         const angle = (index / total) * 2 * Math.PI;
@@ -114,21 +113,22 @@ function RevolvingRing({ ring, isPaused, setActiveSkill }) {
               }}
               onMouseEnter={() => setActiveSkill(skill)}
               onMouseLeave={() => setActiveSkill(null)}
-              className="group flex flex-col items-center justify-center cursor-pointer"
+              onClick={() => setActiveSkill(skill)}
+              className="group flex flex-col items-center justify-center cursor-pointer p-1"
             >
-              {/* Spherical Glowing Capsule */}
-              <div className="relative flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-2xl border border-white/15 bg-[#050b1d]/90 backdrop-blur-md transition-all duration-300 group-hover:scale-125 group-hover:border-cyan-300 group-hover:bg-[#0c1836] group-hover:shadow-[0_0_25px_#38bdf8]">
-                <span className="text-sm sm:text-base font-bold select-none drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">
+              {/* Ultra Zoomed Spherical Capsule (h-12 w-12 on mobile) */}
+              <div className="relative flex h-12 w-12 sm:h-13 sm:w-13 md:h-14 md:w-14 items-center justify-center rounded-2xl border border-white/25 bg-[#050b1d]/95 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.7)] transition-all duration-200 active:scale-95 group-hover:scale-125 group-hover:border-cyan-300 group-hover:bg-[#0c1836] group-hover:shadow-[0_0_28px_#38bdf8]">
+                <span className="text-base sm:text-lg font-bold select-none drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">
                   {skill.icon}
                 </span>
                 <span
-                  className="absolute -bottom-1 h-1 w-5 rounded-full opacity-60 group-hover:opacity-100 transition-opacity"
+                  className="absolute -bottom-1 h-1 w-6 rounded-full opacity-85 group-hover:opacity-100 transition-opacity"
                   style={{ backgroundColor: skill.color }}
                 />
               </div>
 
               {/* Title Tag */}
-              <span className="mt-1 whitespace-nowrap font-mono text-[10px] sm:text-[11px] font-semibold tracking-wide text-slate-300 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_#38bdf8] transition-colors">
+              <span className="mt-1 whitespace-nowrap font-mono text-[11px] sm:text-xs font-bold tracking-wide text-slate-100 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_#38bdf8] transition-colors drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
                 {skill.name}
               </span>
             </motion.div>
@@ -146,25 +146,23 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative min-h-screen w-full overflow-hidden bg-[#020511] text-white flex flex-col justify-between selection:bg-cyan-500/30 select-none py-6 sm:py-8 px-4 sm:px-8"
+      className="relative min-h-screen w-full overflow-hidden bg-[#020511] text-white flex flex-col justify-between selection:bg-cyan-500/30 select-none py-6 sm:py-8 px-3 sm:px-8"
     >
       {/* ================= BACKGROUND FULL-PAGE AMBIENCE ================= */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Full-width Core Ambient Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[90vh] w-[90vw] rounded-full bg-gradient-to-r from-blue-950/30 via-cyan-900/15 to-indigo-950/30 blur-[160px]" />
-        {/* Full Page Space Dots */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[90vh] w-[90vw] rounded-full bg-gradient-to-r from-blue-950/35 via-cyan-900/20 to-indigo-950/35 blur-[150px]" />
         <div className="absolute inset-0 bg-[radial-gradient(#38bdf814_1px,transparent_1px)] [background-size:24px_24px] opacity-60" />
       </div>
 
       {/* ================= 1. TOP HEADER & CATEGORY BAR ================= */}
-      <header className="relative z-20 mx-auto w-full max-w-[1400px] flex flex-col justify-between gap-4 lg:flex-row lg:items-center flex-shrink-0">
+      <header className="relative z-20 mx-auto w-full max-w-[1400px] flex flex-col justify-between gap-3.5 lg:flex-row lg:items-center flex-shrink-0">
         <div>
           <div className="mb-1 flex items-center gap-2 font-mono text-xs tracking-widest text-cyan-400">
             <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#38bdf8]" />
             <span>MY SKILLS</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight font-sans">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight font-sans">
             Technologies I <span className="text-cyan-400">Work With</span>
           </h2>
 
@@ -175,11 +173,11 @@ export default function Skills() {
 
         {/* Categories Legend Dock */}
         <div className="rounded-2xl border border-white/10 bg-[#060c20]/80 p-3 sm:p-4 backdrop-blur-xl shadow-2xl">
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-x-5 gap-y-2 font-mono text-[10px] sm:text-[11px] text-slate-300">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-x-4 sm:gap-x-5 gap-y-1.5 sm:gap-y-2 font-mono text-[10px] sm:text-[11px] text-slate-300">
             {categories.map((c) => (
               <div key={c.name} className="flex items-center gap-2">
                 <span
-                  className="h-2 w-2 rounded-full shadow-[0_0_8px_currentColor]"
+                  className="h-2 w-2 rounded-full shadow-[0_0_8px_currentColor] shrink-0"
                   style={{ backgroundColor: c.color, color: c.color }}
                 />
                 <span className="tracking-wide text-slate-300 truncate">{c.name}</span>
@@ -193,36 +191,33 @@ export default function Skills() {
       <div
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
-        className="relative z-10 mx-auto flex w-full flex-1 items-center justify-center overflow-hidden my-auto"
-        style={{ minHeight: "560px" }}
+        className="relative z-10 mx-auto flex w-full flex-1 items-center justify-center overflow-hidden my-auto min-h-[560px] sm:min-h-[600px]"
       >
-        {/* Responsive CSS Scale Wrapper: Screens-ku thagundhapadi auto-scale aagum */}
-        <div className="relative flex items-center justify-center scale-[0.68] sm:scale-[0.82] md:scale-[0.92] lg:scale-100 xl:scale-[1.08] transition-transform duration-300">
+        {/* Mobile View-la extra zoomed: scale-[1.32] applied directly on mobile */}
+        <div className="relative flex items-center justify-center scale-[1.32] sm:scale-110 md:scale-100 lg:scale-115 xl:scale-125 transition-transform duration-300">
           
           {/* Static Concentric Perspective Grid Shadows */}
           <div className="pointer-events-none absolute flex items-center justify-center">
-            <div className="h-[210px] w-[540px] rounded-[100%] border border-cyan-400/10 shadow-[0_0_40px_rgba(56,189,248,0.1)]" />
-            <div className="absolute h-[320px] w-[820px] rounded-[100%] border border-cyan-400/10 shadow-[0_0_50px_rgba(56,189,248,0.08)]" />
-            <div className="absolute h-[430px] w-[1100px] rounded-[100%] border border-cyan-400/5" />
+            <div className="h-[220px] w-[290px] sm:w-[480px] rounded-[100%] border border-cyan-400/15 shadow-[0_0_45px_rgba(56,189,248,0.12)]" />
+            <div className="absolute h-[350px] w-[470px] sm:w-[680px] rounded-[100%] border border-cyan-400/10 shadow-[0_0_55px_rgba(56,189,248,0.08)]" />
+            <div className="absolute h-[490px] w-[650px] sm:w-[900px] rounded-[100%] border border-cyan-400/5" />
           </div>
 
-          {/* Central Pulsating 3D Neural Brain Node */}
+          {/* Central Pulsating Neural Brain Node */}
           <div className="absolute z-20 flex flex-col items-center justify-center pointer-events-none">
-            {/* Glowing Core Fog */}
-            <div className="absolute h-64 w-64 rounded-full bg-gradient-to-r from-blue-600/40 via-cyan-400/30 to-indigo-600/40 blur-3xl animate-pulse" />
+            <div className="absolute h-48 w-48 sm:h-64 sm:w-64 rounded-full bg-gradient-to-r from-blue-600/40 via-cyan-400/30 to-indigo-600/40 blur-2xl animate-pulse" />
 
-            {/* Neural Brain Artwork */}
             <motion.div
               animate={{
                 scale: [1, 1.05, 1],
                 filter: [
-                  "drop-shadow(0 0 25px rgba(56,189,248,0.75))",
-                  "drop-shadow(0 0 45px rgba(56,189,248,0.95))",
-                  "drop-shadow(0 0 25px rgba(56,189,248,0.75))",
+                  "drop-shadow(0 0 20px rgba(56,189,248,0.75))",
+                  "drop-shadow(0 0 40px rgba(56,189,248,0.95))",
+                  "drop-shadow(0 0 20px rgba(56,189,248,0.75))",
                 ],
               }}
               transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative h-44 w-44 sm:h-52 sm:w-52"
+              className="relative h-36 w-36 sm:h-48 sm:w-48"
             >
               <svg
                 viewBox="0 0 200 200"
@@ -237,7 +232,7 @@ export default function Skills() {
                   d="M100 45C72 45 60 62 60 82C60 92 65 102 65 110C65 125 78 140 100 152C122 140 135 125 135 110C135 102 140 92 140 82C140 62 128 45 100 45Z"
                   stroke="#38bdf8"
                   strokeWidth="2"
-                  fill="url(#brainGlowFull)"
+                  fill="url(#brainGlowUltraZoom)"
                 />
                 
                 <path
@@ -252,7 +247,7 @@ export default function Skills() {
                 <circle cx="118" cy="105" r="3" fill="#a5f3fc" className="animate-pulse" />
 
                 <defs>
-                  <linearGradient id="brainGlowFull" x1="100" y1="45" x2="100" y2="152" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="brainGlowUltraZoom" x1="100" y1="45" x2="100" y2="152" gradientUnits="userSpaceOnUse">
                     <stop stopColor="#0284c7" stopOpacity="0.85" />
                     <stop offset="1" stopColor="#082f49" stopOpacity="0.45" />
                   </linearGradient>
@@ -260,12 +255,12 @@ export default function Skills() {
               </svg>
             </motion.div>
 
-            <div className="mt-2 rounded-full border border-cyan-500/30 bg-[#060c20]/90 px-3 py-1 font-mono text-[9px] font-bold tracking-widest text-cyan-300 backdrop-blur-md">
-              NEURAL_CORE_ACTIVE
+            <div className="mt-1 rounded-full border border-cyan-500/30 bg-[#060c20]/90 px-2.5 py-0.5 font-mono text-[8px] sm:text-[9px] font-bold tracking-widest text-cyan-300 backdrop-blur-md">
+              NEURAL_CORE
             </div>
           </div>
 
-          {/* Planetary Revolving Rings (Continuous Orbit) */}
+          {/* Planetary Revolving Rings */}
           {orbitRings.map((ring) => (
             <RevolvingRing
               key={ring.id}
@@ -276,19 +271,19 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Active Hover Floating Inspector Pill */}
+        {/* Active Hover / Tap Floating Inspector Pill */}
         {activeSkill && (
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="absolute bottom-4 z-30 flex items-center gap-3 rounded-full border border-cyan-400/40 bg-[#07112c]/95 px-6 py-2.5 backdrop-blur-xl shadow-[0_0_25px_rgba(56,189,248,0.45)]"
+            className="absolute bottom-2.5 z-30 flex items-center gap-2.5 rounded-full border border-cyan-400/40 bg-[#07112c]/95 px-5 py-2 backdrop-blur-xl shadow-[0_0_25px_rgba(56,189,248,0.5)]"
           >
-            <span className="text-xl">{activeSkill.icon}</span>
-            <span className="font-mono text-sm font-bold text-white tracking-wide">
+            <span className="text-lg sm:text-xl">{activeSkill.icon}</span>
+            <span className="font-mono text-xs sm:text-sm font-bold text-white tracking-wide">
               {activeSkill.name}
             </span>
             <span className="text-slate-600">|</span>
-            <span className="font-mono text-xs text-cyan-300">
+            <span className="font-mono text-[11px] sm:text-xs text-cyan-300">
               {activeSkill.cat}
             </span>
           </motion.div>
@@ -296,7 +291,7 @@ export default function Skills() {
       </div>
 
       {/* ================= 3. BOTTOM VIEWPORT DOCK ================= */}
-      <footer className="relative z-20 mx-auto w-full max-w-[1400px] flex flex-wrap items-center justify-between border-t border-white/10 pt-4 font-mono text-xs text-slate-500 flex-shrink-0">
+      <footer className="relative z-20 mx-auto w-full max-w-[1400px] flex flex-wrap items-center justify-between border-t border-white/10 pt-3 font-mono text-xs text-slate-500 flex-shrink-0 gap-2">
         <div className="flex items-center gap-2">
           <span className="text-slate-400">Code</span>
           <span>→</span>
@@ -306,15 +301,15 @@ export default function Skills() {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="h-4 w-2.5 rounded-full border border-slate-600 p-0.5 flex justify-center">
+          <span className="h-3.5 w-2 rounded-full border border-slate-600 p-0.5 flex justify-center">
             <span className="h-1 w-0.5 rounded-full bg-cyan-400 animate-bounce" />
           </span>
-          <span className="text-[10px] tracking-widest text-slate-400 uppercase">
-            Scroll to explore
+          <span className="text-[9px] sm:text-[10px] tracking-widest text-slate-400 uppercase">
+            Tap icons to inspect
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="hidden sm:flex items-center gap-2">
           <span className="text-cyan-400 font-bold">////</span>
           <span className="text-slate-400">Turning Ideas Into Reality</span>
         </div>

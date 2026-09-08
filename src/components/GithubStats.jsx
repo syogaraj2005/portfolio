@@ -109,8 +109,8 @@ export default function GithubStats() {
           </div>
         </div>
 
-        {/* ================= 2. AUTHENTIC GITHUB CONTRIBUTION GRAPH ================= */}
-        <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-[#0d1117] p-5 shadow-2xl backdrop-blur-xl">
+        {/* ================= 2. PURE BLACK GITHUB CONTRIBUTION GRAPH ================= */}
+        <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-black p-5 shadow-[0_0_35px_rgba(0,0,0,0.9)] backdrop-blur-xl">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2 font-mono text-xs text-slate-300">
               <Calendar size={15} className="text-emerald-400" />
@@ -128,12 +128,12 @@ export default function GithubStats() {
             </a>
           </div>
 
-          {/* SVG Heatmap Image with Real GitHub Dark Palette */}
-          <div className="w-full overflow-x-auto rounded-xl border border-white/[0.06] bg-[#010409] p-4 scrollbar-thin scrollbar-thumb-white/10">
+          {/* SVG Heatmap Image with Pure Black Background Container */}
+          <div className="w-full overflow-x-auto rounded-xl border border-white/10 bg-black p-4 scrollbar-thin scrollbar-thumb-white/10">
             <img
               src={`https://ghchart.rshah.org/39d353/${GITHUB_USERNAME}`}
               alt={`${GITHUB_USERNAME}'s GitHub Contribution Heatmap`}
-              className="min-w-[680px] w-full"
+              className="min-w-[680px] w-full filter contrast-125"
               loading="lazy"
             />
           </div>

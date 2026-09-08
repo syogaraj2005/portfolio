@@ -1,7 +1,7 @@
 import React from "react";
+import collegeLogo from "../assets/svv-logo.png";
 import { motion } from "framer-motion";
 import {
-  GraduationCap,
   Calendar,
   Award,
   BookOpen,
@@ -26,21 +26,34 @@ const certifications = [
     year: "2024",
   },
   {
-    title: "Spring Boot & Microservices",
-    issuer: "Online Academy",
-    year: "2024",
+    title: "SQL & Relational Databases",
+    issuer: "Certification Authority",
+    year: "2025",
   },
   {
-    title: "SQL & Relational Databases",
+    title: "Prompt Engineering",
     issuer: "Technical Platform",
-    year: "2023",
+    year: "2026",
   },
 ];
 
 const achievements = [
-  "Active Problem Solver on LeetCode with consistent DSA practice.",
-  "Developed enterprise-grade web applications like AI BookShare & TN RideX Pro.",
-  "Participated in technical symposiums and university-level project presentations.",
+  {
+    title: "Consistent Problem Solving",
+    desc: "Practicing DSA and competitive problem solving on LeetCode.",
+  },
+  {
+    title: "Full-Stack Project Development",
+    desc: "Built real-world applications across frontend, backend, databases, and AI.",
+  },
+  {
+    title: "Hackathon Participation",
+    desc: "Participated in technical hackathons and collaborative software development challenges.",
+  },
+  {
+    title: "Industry Internship",
+    desc: "Gained practical industry exposure through professional internship experience.",
+  },
 ];
 
 export default function Education() {
@@ -72,16 +85,17 @@ export default function Education() {
         {/* Timeline & Credentials Container */}
         <div className="grid gap-8 lg:grid-cols-12">
           
-          {/* Main Academic Card (Left Column) */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-7"
-          >
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#060b18]/90 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
-              
+          {/* Main Academic & Sports Column (Left Column - 7 Cols) */}
+          <div className="space-y-6 lg:col-span-7">
+            
+            {/* Academic Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#060b18]/90 p-6 shadow-2xl backdrop-blur-xl sm:p-8"
+            >
               {/* Top Meta Bar */}
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-5">
                 <div className="flex items-center gap-2 rounded-lg border border-cyan-400/30 bg-cyan-500/10 px-3 py-1 font-mono text-xs text-cyan-300">
@@ -95,18 +109,22 @@ export default function Education() {
                 </div>
               </div>
 
-              {/* Degree & College Info */}
+              {/* Degree & College Info with SVV College Logo */}
               <div className="mt-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-cyan-400/40 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 text-cyan-400 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
-                    <GraduationCap size={26} />
+                <div className="flex items-center gap-4 sm:gap-5">
+                  <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/40 bg-white/5 p-2 shadow-[0_0_20px_rgba(56,189,248,0.25)] backdrop-blur-md">
+                    <img
+                      src={collegeLogo}
+                      alt="SVV College Logo"
+                      className="h-full w-full object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                    />
                   </div>
                   <div>
-                    <h3 className="font-mono text-xl font-bold text-white sm:text-2xl">
+                    <h3 className="font-mono text-lg font-bold text-white sm:text-2xl leading-snug">
                       B.E in Computer Science &amp; Engineering
                     </h3>
-                    <p className="mt-1 flex items-center gap-2 font-sans text-sm text-slate-400">
-                      <Building2 size={15} className="text-cyan-400" />
+                    <p className="mt-1.5 flex items-center gap-2 font-sans text-xs sm:text-sm text-slate-300">
+                      <Building2 size={15} className="text-cyan-400 shrink-0" />
                       <span>Shree Venkateshwara Hi-Tech Engineering College</span>
                     </p>
                   </div>
@@ -139,14 +157,39 @@ export default function Education() {
                   ))}
                 </div>
               </div>
+            </motion.div>
 
-            </div>
-          </motion.div>
+            {/* Left Side: Cricket Enthusiast Highlight Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="rounded-2xl border border-cyan-400/25 bg-gradient-to-r from-[#060b18]/95 via-[#071330]/90 to-[#060b18]/95 p-5 shadow-[0_0_25px_rgba(56,189,248,0.12)] backdrop-blur-xl"
+            >
+              <div className="flex items-start gap-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-cyan-400/40 bg-cyan-500/10 text-2xl shadow-[0_0_15px_rgba(56,189,248,0.3)]">
+                  🏏
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h4 className="font-mono text-xs sm:text-sm font-bold tracking-wider text-cyan-300 uppercase">
+                      Cricket Enthusiast
+                    </h4>
+                    <span className="flex h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_6px_#38bdf8]" />
+                  </div>
+                  <p className="mt-1.5 font-sans text-xs leading-relaxed text-slate-300 sm:text-sm">
+                      Enjoy playing competitive cricket in my free time as a right-arm fast-medium bowler, developing discipline, fitness, and team spirit.                  </p>
+                </div>
+              </div>
+            </motion.div>
 
-          {/* Right Column: Certifications & Highlights */}
+          </div>
+
+          {/* Right Column: Certifications & Highlights (5 Cols) */}
           <div className="space-y-6 lg:col-span-5">
             
-            {/* Certifications Box */}
+            {/* Certifications Box with Updated 2024-2026 Credentials */}
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -181,7 +224,7 @@ export default function Education() {
               </div>
             </motion.div>
 
-            {/* Academic Highlights / Achievements */}
+            {/* Academic Highlights / Key Milestones */}
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -194,11 +237,16 @@ export default function Education() {
                 <span>Key Milestones</span>
               </div>
 
-              <ul className="space-y-3 font-sans text-xs text-slate-300">
+              <ul className="space-y-3.5 font-sans text-xs text-slate-300">
                 {achievements.map((item, i) => (
                   <li key={i} className="flex items-start gap-2.5 leading-relaxed">
-                    <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-emerald-400" />
-                    <span>{item}</span>
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-emerald-400" />
+                    <div>
+                      <span className="font-semibold text-white tracking-wide">
+                        {item.title}
+                      </span>
+                      <span className="text-slate-400"> — {item.desc}</span>
+                    </div>
                   </li>
                 ))}
               </ul>

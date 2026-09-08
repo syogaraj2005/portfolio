@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import myProfileImg from "../assets/my2.jpeg";
 import { motion } from "framer-motion";
 import {
@@ -41,7 +41,7 @@ const milestones = [
   },
   {
     icon: <FolderGit2 className="text-cyan-400" size={20} />,
-    title: "5+",
+    title: "7+",
     subtitle: "Projects",
     desc: "Built real-world projects with clean and scalable code.",
   },
@@ -61,6 +61,7 @@ const milestones = [
 
 export default function About() {
   const cvDownloadUrl = `${import.meta.env.BASE_URL}Yogaraj_S CV.pdf`;
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <section
@@ -139,35 +140,72 @@ export default function About() {
             
             {/* Ambient Workstation Desk Glow */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="h-[340px] w-[500px] rounded-full bg-cyan-500/15 blur-[120px]" />
+              <div
+                className={`h-[340px] w-[500px] rounded-full bg-cyan-500/15 blur-[120px] transition-all duration-500 ${
+                  isHovered ? "bg-cyan-400/35 scale-110 blur-[100px]" : "bg-cyan-500/15 scale-100"
+                }`}
+              />
             </div>
 
-            {/* Center Developer Avatar / Desk Setup */}
+            {/* Center Developer Avatar with Mass Shake / Rumble Hover Animation */}
             <div className="relative z-10 flex items-center justify-center">
-              <div className="relative w-[340px] sm:w-[420px] aspect-[4/5] overflow-hidden rounded-3xl [mask-image:linear-gradient(to_bottom,black_75%,transparent_98%)]">
-                <img
+              <motion.div
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                animate={
+                  isHovered
+                    ? {
+                        x: [0, -3, 3, -4, 4, -2, 2, 0],
+                        y: [0, 2, -2, 3, -3, 1, -1, 0],
+                        rotate: [0, -1.8, 1.8, -2.5, 2.5, -1, 1, 0],
+                        scale: 1.05,
+                      }
+                    : { x: 0, y: 0, rotate: 0, scale: 1 }
+                }
+                transition={{
+                  duration: 0.45,
+                  repeat: isHovered ? Infinity : 0,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                }}
+                className="relative w-[320px] sm:w-[420px] aspect-[4/5] overflow-hidden rounded-3xl [mask-image:linear-gradient(to_bottom,black_75%,transparent_98%)] cursor-pointer"
+              >
+                <motion.img
                   src={myProfileImg}
                   alt="Yogaraj S"
-                  className="w-full h-full object-cover object-top contrast-115 brightness-95 drop-shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
+                  animate={{
+                    filter: isHovered
+                      ? "contrast(125%) brightness(110%) drop-shadow(0 0 35px rgba(56,189,248,0.75))"
+                      : "contrast(115%) brightness(95%) drop-shadow(0 20px 45px rgba(0,0,0,0.9))",
+                  }}
+                  transition={{ duration: 0.25 }}
+                  className="w-full h-full object-cover object-top"
                 />
 
                 {/* Cyber Workstation Laptop Watermark Icon */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center justify-center rounded-xl border border-cyan-400/40 bg-[#050e26]/85 px-4 py-2 backdrop-blur-md shadow-[0_0_20px_rgba(56,189,248,0.4)]">
+                <div
+                  className={`absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center justify-center rounded-xl border bg-[#050e26]/85 px-4 py-2 backdrop-blur-md shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all duration-300 ${
+                    isHovered
+                      ? "border-cyan-300 shadow-[0_0_30px_#38bdf8] scale-110"
+                      : "border-cyan-400/40"
+                  }`}
+                >
                   <span className="font-mono text-cyan-300 font-bold text-xs tracking-wider">&lt;/&gt;</span>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
-            {/* Floating Motivational Quote Card */}
+            {/* Repositioned Floating Motivational Quote Card */}
             <motion.div
               animate={{ y: [-4, 4, -4] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-4 right-0 sm:right-4 z-20 w-44 sm:w-48 rounded-2xl border border-cyan-400/30 bg-[#061028]/85 p-4 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.6)] [transform:rotate(3deg)]"
+              className="absolute z-20 w-40 sm:w-48 rounded-2xl border border-cyan-400/30 bg-[#061028]/90 p-3.5 sm:p-4 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.7)]
+                bottom-8 -left-2 sm:bottom-12 sm:left-4 lg:bottom-auto lg:top-4 lg:left-auto lg:right-4 [transform:rotate(-2deg)] lg:[transform:rotate(3deg)]"
             >
-              <p className="font-sans text-xs italic text-slate-200 leading-relaxed">
+              <p className="font-sans text-[11px] sm:text-xs italic text-slate-200 leading-relaxed">
                 "Small steps every day lead to big results."
               </p>
-              <p className="mt-2 text-right font-mono text-[10px] text-cyan-400 font-semibold">
+              <p className="mt-1.5 sm:mt-2 text-right font-mono text-[9px] sm:text-[10px] text-cyan-400 font-semibold">
                 — Yogaraj S
               </p>
             </motion.div>
