@@ -5,5 +5,5 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/portfolio/', // <-- Small letters '/portfolio/' aaga irukka vendum
+  base: './', // <-- './' veithaal GitHub Pages matrum Netlify irandilume assets correct-aa load aagum
 })
