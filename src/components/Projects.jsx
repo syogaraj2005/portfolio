@@ -1,8 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { GithubIcon } from "./icons.jsx";
-
+import { ArrowUpRight, ExternalLink } from "lucide-react";
+import { GithubIcon as Github } from "./icons.jsx";
 /* =========================================================
    PROJECTS WITH SUITABLE HIGH-QUALITY TECH IMAGERY
    ========================================================= */
