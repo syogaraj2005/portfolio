@@ -200,7 +200,7 @@ function ProjectCard({ project, index }) {
                     className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-slate-400 transition-all duration-200 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-300"
                     aria-label={`${project.name} GitHub Repository`}
                   >
-                    <GithubIcon size={15} />
+                    <Github size={15} />
                   </motion.a>
                 )}
 
@@ -427,7 +427,7 @@ export default function Projects() {
             }}
             className="group flex items-center gap-2 rounded-full border border-cyan-500/25 bg-cyan-500/5 px-4 py-2 font-mono text-[10px] tracking-wider text-cyan-300 transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] sm:text-xs"
           >
-            <GithubIcon size={14} />
+            <Github size={14} />
             <span>VIEW GITHUB</span>
             <ArrowUpRight
               size={13}
